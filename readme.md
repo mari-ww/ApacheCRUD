@@ -7,7 +7,7 @@
 - [x] Insert
 - [x] Select
 - [x] Update
-- [x] Alter Table
+- [x] Alter Table (Alteração)
 - [x] Delete
 
 ## Deploy
@@ -57,7 +57,7 @@ UPDATE heartrate
     AND time = '2021-05-01 01:00 +0000';
 ```
 
-## Alter Table
+## Alter Table (Alteração)
 # add coluna
 ```sql
 ALTER TABLE heartrate ADD location text;
