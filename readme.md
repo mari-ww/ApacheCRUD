@@ -1,14 +1,14 @@
 # Apache Cassandra
 
-- [ ] Deploy
-- [ ] CQLSH
-- [ ] Keyspace
-- [ ] Tabelas
-- [ ] Insert
-- [ ] Select
-- [ ] Update
-- [ ] Alter Table
-- [ ] Delete
+- [x] Deploy
+- [x] CQLSH
+- [x] Keyspace
+- [x] Tabelas
+- [x] Insert
+- [x] Select
+- [x] Update
+- [x] Alter Table
+- [x] Delete
 
 ## Deploy
 
