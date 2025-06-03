@@ -1,85 +1,69 @@
-# Apache Cassandra
+# CRUD Apache Cassandra
 
-- [x] Deploy
-- [x] CQLSH
-- [x] Keyspace
-- [x] Tabelas
-- [x] Insert
-- [x] Select
-- [x] Update
-- [x] Alter Table (Alteração)
-- [x] Delete
-
-## Deploy
+## Como rodar o Cassandra com Docker
 
 ```bash
 docker-compose up -d
-
-docker exec -it cassandra-node1 nodetool status
 ```
 
-## CQLSH
+## Acessando o CQL Shell (cqlsh)...
 
 ```bash
 docker exec -it cassandra-node1 cqlsh
 ```
 
-## Keyspace
+## Criando um Keyspace...
 ```sql
-CREATE KEYSPACE pets_db WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 3 } AND DURABLE_WRITES = true;
+CREATE KEYSPACE undertale_db WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 3 } AND DURABLE_WRITES = true;
 
-USE pets_db;
+USE undertale_db;
 ```
 
-## Criar tabela
+## Criando a Tabela battles...
 ```sql
-CREATE TABLE heartrate( pet_chip_id uuid, owner uuid, time timestamp, heart_rate int, PRIMARY KEY (pet_chip_id, time) );
+CREATE TABLE battles ( player_id uuid, encounter_time timestamp, character_name text, encounter_type text,damage_caused int,fled boolean,PRIMARY KEY (player_id, encounter_time));
 ```
 
-## Inserir registros
+## Inserindo Dados...
 ```sql
-INSERT INTO heartrate (pet_chip_id, owner, time, heart_rate) VALUES ( a2a60505-3e17-4ad4-8e1a-f11139caa1cc, 642adfee-6ad9-4ca5-aa32-a72e506b8ad8, '2021-05-01 01:00 +0000', 100 );
+INSERT INTO battles (player_id, encounter_time, character_name, encounter_type, damage_caused, fled) VALUES (123e4567-e89b-12d3-a456-426614174000, '2025-06-03 15:00 +0000', 'Sans', 'Battle', 12, false);
 
-INSERT INTO heartrate (pet_chip_id, owner, time, heart_rate) VALUES ( a2a60505-3e17-4ad4-8e1a-f11139caa1cc, 642adfee-6ad9-4ca5-aa32-a72e506b8ad8, '2021-05-01 01:01 +0000', 101 );
+INSERT INTO battles (player_id, encounter_time, character_name, encounter_type, damage_caused, fled) VALUES (123e4567-e89b-12d3-a456-426614174000, '2025-06-03 15:05 +0000', 'Papyrus', 'Battle', 8, true);
 ```
 
-## Select
+## Consultando Dados...
 ```sql
-SELECT * FROM heartrate
-  WHERE pet_chip_id = a2a60505-3e17-4ad4-8e1a-f11139caa1cc;
+SELECT * FROM battles WHERE player_id = 123e4567-e89b-12d3-a456-426614174000;
 ```
 
-## Update
+## Atualizando Registros...
 ```sql
-UPDATE heartrate
-  SET heart_rate = 105
-  WHERE pet_chip_id = a2a60505-3e17-4ad4-8e1a-f11139caa1cc
-    AND time = '2021-05-01 01:00 +0000';
+UPDATE battles SET damage_caused = 15, fled = false WHERE player_id = 123e4567-e89b-12d3-a456-426614174000 AND encounter_time = '2025-06-03 15:05 +0000';
 ```
 
-## Alter Table (Alteração)
-# add coluna
+## Alterando a Tabela...
+# adiciona coluna
 ```sql
-ALTER TABLE heartrate ADD location text;
+ALTER TABLE battles ADD location text;
 ```
 
 # remove coluna
 ```sql
-ALTER TABLE heartrate DROP owner;
+ALTER TABLE battles DROP encounter_type;
 ```
 
-## Delete
-# excluir linha
+## Deletando Dados...
+# exclui linha
 ```sql
-DELETE FROM heartrate WHERE pet_chip_id = a2a60505-3e17-4ad4-8e1a-f11139caa1cc AND time = '2021-05-01 01:01 +0000';
+DELETE FROM battles WHERE player_id = 123e4567-e89b-12d3-a456-426614174000 AND encounter_time = '2025-06-03 15:00 +0000';
 ```
 
-#  excluir colunas
+# exclui colunas
 ```sql
-DELETE FROM heartrate WHERE pet_chip_id = a2a60505-3e17-4ad4-8e1a-f11139caa1cc;
+DELETE damage_caused, fled FROM battles WHERE player_id = 123e4567-e89b-12d3-a456-426614174000;
 ```
 
-# excluir tabela
+# exclui tabela
 ```sql
-DROP TABLE heartrate;
+DROP TABLE battles;
 ```
