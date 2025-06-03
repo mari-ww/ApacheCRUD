@@ -42,28 +42,28 @@ UPDATE battles SET damage_caused = 15, fled = false WHERE player_id = 123e4567-e
 ```
 
 ## Alterando a Tabela...
-# adiciona coluna
+- [x] adiciona coluna
 ```sql
 ALTER TABLE battles ADD location text;
 ```
 
-# remove coluna
+- [x] remove coluna
 ```sql
 ALTER TABLE battles DROP encounter_type;
 ```
 
 ## Deletando Dados...
-# exclui linha
+- [x] exclui linha
 ```sql
 DELETE FROM battles WHERE player_id = 123e4567-e89b-12d3-a456-426614174000 AND encounter_time = '2025-06-03 15:00 +0000';
 ```
 
-# exclui colunas
+- [x] exclui colunas
 ```sql
 DELETE damage_caused, fled FROM battles WHERE player_id = 123e4567-e89b-12d3-a456-426614174000;
 ```
 
-# exclui tabela
+- [x] exclui tabela
 ```sql
 DROP TABLE battles;
 ```
